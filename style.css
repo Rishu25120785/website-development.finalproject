@@ -1,51 +1,156 @@
 body {
-    font-family: Arial;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+  background: #fffaf5;
 }
 
-nav {
-    background: brown;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #f8c8c8;
+  position: sticky;
+  top: 0;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
 }
 
-nav ul li {
-    margin: 10px;
+.navbar a {
+  text-decoration: none;
+  color: #333;
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#ffe4e1, #fff);
+  text-align: center;
 }
 
-header {
-    background: #f4c2c2;
-    padding: 40px;
-    text-align: center;
+.hero h1 {
+  font-size: 3rem;
+  animation: fadeIn 2s;
 }
 
-.products {
-    padding: 20px;
+.hero button {
+  padding: 10px 20px;
+  background: #ff7f7f;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: scale(1.1);
+}
+
+/* SECTIONS */
+.section {
+  padding: 60px;
+  text-align: center;
+}
+
+/* ABOUT */
+.about-container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.about-container img {
+  border-radius: 10px;
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
-    background: #eee;
-    padding: 20px;
-    margin: 10px;
-    display: inline-block;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* GALLERY */
+.gallery img {
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}
+
+/* HIGHLIGHT */
+.highlight {
+  background: #ffe4e1;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+/* TESTIMONIAL */
+.testimonial {
+  font-style: italic;
+}
+
+/* FORM */
+input, textarea {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 250px;
+}
+
+/* FOOTER */
 footer {
-    background: brown;
-    color: white;
-    text-align: center;
-    padding: 10px;
+  background: #333;
+  color: white;
+  padding: 10px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+  100% {transform: scale(1);}
+}
+
+/* SCROLL ANIMATION */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
