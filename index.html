@@ -3,109 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heaven's Bakery</title>
+<title>Velour Crumbs</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div class="progress-bar"></div>
+
 <!-- NAVBAR -->
-<nav class="navbar">
-  <h2>Heaven's Bakery</h2>
+<nav id="navbar">
+  <h2>Velour Crumbs</h2>
   <ul>
     <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
     <li><a href="#menu">Menu</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <div class="hero-content">
-    <h1>Freshly Baked Happiness</h1>
-    <p>Delicious cakes, pastries & breads made with love</p>
-    <button onclick="scrollToSection('menu')">Explore Menu</button>
+  <div>
+    <h1>Where Every Crumb Tells a Story</h1>
+    <p>Crafted indulgence, baked to perfection</p>
+
+    <div class="hero-stats">
+      <span>⭐ 5000+ Happy Customers</span>
+      <span>🕒 Freshly baked daily</span>
+      <span>🌿 Premium ingredients</span>
+    </div>
+
+    <button class="btn">Explore Menu</button>
   </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div>Freshly Baked Daily</div>
+  <div>No Preservatives</div>
+  <div>Premium Ingredients</div>
+  <div>Custom Orders</div>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="section reveal">
-  <div class="about-container">
-    <img src="https://source.unsplash.com/400x400/?bakery">
-    <div>
-      <h2>About Us</h2>
-      <p>We are a local bakery crafting fresh, delicious baked goods daily using premium ingredients and love.</p>
-    </div>
-  </div>
+  <h2>The Philosophy Behind Velour Crumbs</h2>
+  <p>
+    Velour Crumbs was built on a simple belief — that true quality cannot be rushed.
+    Every product is crafted with patience, precision, and passion.
+  </p>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div><h3 class="counter">5000</h3><p>Orders</p></div>
+  <div><h3 class="counter">50</h3><p>Recipes</p></div>
+  <div><h3 class="counter">4.9</h3><p>Rating</p></div>
+  <div><h3 class="counter">3</h3><p>Years</p></div>
 </section>
 
 <!-- MENU -->
 <section id="menu" class="section reveal">
   <h2>Our Menu</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="https://source.unsplash.com/200x200/?cake">
-      <h3>Cakes</h3>
-      <p>₹500+</p>
-    </div>
-    <div class="card">
-      <img src="https://source.unsplash.com/200x200/?pastry">
-      <h3>Pastries</h3>
-      <p>₹80</p>
-    </div>
-    <div class="card">
-      <img src="https://source.unsplash.com/200x200/?bread">
-      <h3>Bread</h3>
-      <p>₹60</p>
-    </div>
+
+  <div class="filters">
+    <button onclick="filterMenu('all')">All</button>
+    <button onclick="filterMenu('cake')">Cakes</button>
+    <button onclick="filterMenu('pastry')">Pastries</button>
+  </div>
+
+  <div class="menu">
+    <div class="item cake">Biscoff Cake - ₹1100</div>
+    <div class="item pastry">Chocolate Slice - ₹200</div>
+    <div class="item cake">Red Velvet - ₹900</div>
+    <div class="item pastry">Croissant - ₹150</div>
   </div>
 </section>
 
-<!-- OFFERS -->
-<section class="section highlight reveal">
-  <h2>Special Offers</h2>
-  <p>✨ Buy 1 Cake & Get 1 Pastry FREE ✨</p>
-</section>
-
 <!-- GALLERY -->
-<section id="gallery" class="section reveal">
+<section class="section reveal">
   <h2>Gallery</h2>
   <div class="gallery">
     <img src="https://source.unsplash.com/300x300/?cake">
-    <img src="https://source.unsplash.com/300x300/?cookies">
+    <img src="https://source.unsplash.com/300x300/?dessert">
     <img src="https://source.unsplash.com/300x300/?bakery">
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIAL -->
 <section class="section reveal">
   <h2>Testimonials</h2>
-  <div class="testimonial">
-    <p>"Best bakery in town! Loved the cakes!"</p>
-    <h4>- Customer</h4>
-  </div>
+  <p>"Best luxury bakery experience!"</p>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="section reveal">
-  <h2>Contact Us</h2>
-
-  <form id="contactForm">
-    <input type="text" placeholder="Name" required>
-    <input type="email" placeholder="Email" required>
+  <h2>Contact</h2>
+  <form id="form">
+    <input placeholder="Name" required>
+    <input placeholder="Email" required>
     <textarea placeholder="Message"></textarea>
-    <button type="submit">Send</button>
+    <button>Send</button>
   </form>
-
-  <p>📍 Local Market</p>
-  <p>🕒 9 AM - 9 PM</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 Heaven's Bakery</p>
+  <p>© Velour Crumbs</p>
 </footer>
 
 <script src="script.js"></script>
