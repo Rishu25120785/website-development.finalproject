@@ -1,119 +1,1136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velour Crumbs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velour Crumbs | Crafted Indulgence</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-color: #FFF8F3;
+            --secondary-bg: #F5E6DA;
+            --accent-color: #E8CFC5;
+            --text-primary: #2E2E2E;
+            --text-muted: #5A5A5A;
+            --highlight: #6B4F4F;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .luxury-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* --- Scroll Progress Bar --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--highlight);
+            z-index: 1001;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--highlight);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(107, 79, 79, 0.2);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--highlight);
+            color: var(--highlight);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--highlight);
+            color: var(--white);
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 1.5rem 0;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 248, 243, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--highlight);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight);
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FFF8F3 0%, #F5E6DA 100%);
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--accent-color);
+            padding-top: 2rem;
+        }
+
+        .stat-item span {
+            display: block;
+            font-weight: 700;
+            color: var(--highlight);
+        }
+
+        .stat-item small {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 80%;
+            background: url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=1000') center/cover;
+            border-radius: 40px 0 0 40px;
+            box-shadow: -20px 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .floating-blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-color);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0.4;
+            animation: float 20s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 50px); }
+        }
+
+        /* --- Trust Strip --- */
+        .trust-strip {
+            background-color: var(--highlight);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .trust-item i {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .trust-item p {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=800') center/cover;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -30px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .about p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- Stats Animated --- */
+        .stats-banner {
+            background-color: var(--secondary-bg);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .stats-flex {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .stat-card h3 {
+            font-size: 3.5rem;
+            color: var(--highlight);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Menu Section --- */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .filter-btn.active {
+            color: var(--highlight);
+            font-weight: 600;
+        }
+
+        .filter-btn.active::after {
+            width: 100%;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .menu-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+        }
+
+        .menu-info h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--highlight);
+        }
+
+        .menu-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Experience Section --- */
+        .experience {
+            background: var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .exp-list {
+            list-style: none;
+        }
+
+        .exp-list li {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .exp-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--highlight);
+        }
+
+        /* --- Gallery --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:nth-child(1) { grid-column: span 2; }
+        .gallery-item:nth-child(4) { grid-row: span 2; }
+
+        /* --- Lightbox --- */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* --- Testimonials --- */
+        .testimonials {
+            background: var(--secondary-bg);
+        }
+
+        .testimonial-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testi-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .testi-card i {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .testi-card p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testi-user h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .testi-user span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- How It Works --- */
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .how-item h4 {
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        /* --- Contact --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--accent-color);
+            background: var(--white);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #1a1a1a;
+            color: #d1d1d1;
+            padding: 80px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: inherit;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .newsletter input {
+            padding: 0.8rem;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-image { display: none; }
+            .hero-content { max-width: 100%; text-align: center; margin: 0 auto; }
+            .hero-stats { justify-content: center; }
+            .about-grid, .experience-content, .contact-container, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .how-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid, .how-grid { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="progress-bar"></div>
+    <div id="scroll-progress"></div>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <h2>Velour Crumbs</h2>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#menu">Menu</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo h3">VELOUR CRUMBS</a>
+            <ul class="nav-links">
+                <li><a href="#about">Philosophy</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#menu" class="btn btn-primary" style="padding: 0.6rem 1.5rem;">Order Now</a>
+        </div>
+    </nav>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <div>
-    <h1>Where Every Crumb Tells a Story</h1>
-    <p>Crafted indulgence, baked to perfection</p>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="floating-blob" style="top: 10%; left: -5%;"></div>
+        <div class="container hero-content">
+            <div class="reveal">
+                <h1>Where Every Crumb <br><i class="luxury-serif" style="font-weight: 400;">Tells a Story</i></h1>
+                <p>At Velour Crumbs, we believe desserts should do more than satisfy a craving — they should create a lasting memory of elegance.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#menu" class="btn btn-primary">Explore Menu</a>
+                    <a href="#about" class="btn btn-outline">Our Story</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span>5,000+</span>
+                        <small>Happy Patrons</small>
+                    </div>
+                    <div class="stat-item">
+                        <span>Daily</span>
+                        <small>Fresh Batches</small>
+                    </div>
+                    <div class="stat-item">
+                        <span>100%</span>
+                        <small>Organic Ingredients</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
 
-    <div class="hero-stats">
-      <span>⭐ 5000+ Happy Customers</span>
-      <span>🕒 Freshly baked daily</span>
-      <span>🌿 Premium ingredients</span>
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="container trust-grid">
+            <div class="trust-item">
+                <i data-lucide="clock"></i>
+                <p>Freshly Baked Daily</p>
+            </div>
+            <div class="trust-item">
+                <i data-lucide="shield-check"></i>
+                <p>No Artificial Flavors</p>
+            </div>
+            <div class="trust-item">
+                <i data-lucide="award"></i>
+                <p>Premium Ingredients</p>
+            </div>
+            <div class="trust-item">
+                <i data-lucide="package"></i>
+                <p>Custom Gift Orders</p>
+            </div>
+        </div>
     </div>
 
-    <button class="btn">Explore Menu</button>
-  </div>
-</section>
+    <!-- About Section -->
+    <section id="about" class="section-padding about">
+        <div class="container about-grid">
+            <div class="about-image reveal"></div>
+            <div class="about-text reveal">
+                <h2 class="luxury-serif">The Philosophy Behind <br>Velour Crumbs</h2>
+                <p>Velour Crumbs was built on a simple belief — that true quality cannot be rushed. In a world of mass production, we choose the path of patience and precision.</p>
+                <p>Every pastry, loaf, and cake is handcrafted to deliver elegance in every bite. Our recipes are developed with scientific accuracy, yet flavored with human emotion.</p>
+                <p>We don’t just bake for taste — we bake for texture, for the aroma that fills a room, and for the joy of a shared moment. From the first glance at our packaging to the final lingering note of cocoa, every detail is designed to feel premium.</p>
+                <a href="#contact" class="btn btn-outline" style="margin-top: 1rem;">Visit Our Boutique</a>
+            </div>
+        </div>
+    </section>
 
-<!-- TRUST STRIP -->
-<section class="trust">
-  <div>Freshly Baked Daily</div>
-  <div>No Preservatives</div>
-  <div>Premium Ingredients</div>
-  <div>Custom Orders</div>
-</section>
+    <!-- Stats Section -->
+    <section class="stats-banner">
+        <div class="container stats-flex">
+            <div class="stat-card reveal">
+                <h3 class="counter" data-target="5000">0</h3>
+                <p>Orders Served</p>
+            </div>
+            <div class="stat-card reveal">
+                <h3 class="counter" data-target="50">0</h3>
+                <p>Signature Recipes</p>
+            </div>
+            <div class="stat-card reveal">
+                <h3 class="counter" data-target="4.9">0</h3>
+                <p>Average Rating</p>
+            </div>
+            <div class="stat-card reveal">
+                <h3 class="counter" data-target="3">0</h3>
+                <p>Years of Craft</p>
+            </div>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="section reveal">
-  <h2>The Philosophy Behind Velour Crumbs</h2>
-  <p>
-    Velour Crumbs was built on a simple belief — that true quality cannot be rushed.
-    Every product is crafted with patience, precision, and passion.
-  </p>
-</section>
+    <!-- Menu Section -->
+    <section id="menu" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="luxury-serif">Curated Collections</h2>
+                <p>Hand-picked delights, baked with the finest ingredients sourced globally.</p>
+            </div>
 
-<!-- STATS -->
-<section class="stats">
-  <div><h3 class="counter">5000</h3><p>Orders</p></div>
-  <div><h3 class="counter">50</h3><p>Recipes</p></div>
-  <div><h3 class="counter">4.9</h3><p>Rating</p></div>
-  <div><h3 class="counter">3</h3><p>Years</p></div>
-</section>
+            <div class="filter-container reveal">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="breads">Breads</button>
+                <button class="filter-btn" data-filter="cakes">Cakes</button>
+                <button class="filter-btn" data-filter="pastries">Pastries</button>
+            </div>
 
-<!-- MENU -->
-<section id="menu" class="section reveal">
-  <h2>Our Menu</h2>
+            <div class="menu-grid" id="menu-items">
+                <!-- Items will be injected by JS -->
+            </div>
+        </div>
+    </section>
 
-  <div class="filters">
-    <button onclick="filterMenu('all')">All</button>
-    <button onclick="filterMenu('cake')">Cakes</button>
-    <button onclick="filterMenu('pastry')">Pastries</button>
-  </div>
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding experience">
+        <div class="container experience-content">
+            <div class="reveal">
+                <h2 class="luxury-serif" style="font-size: 3rem; margin-bottom: 2rem;">More Than Desserts — <br>An Experience</h2>
+                <p style="margin-bottom: 2.5rem;">We've redefined what it means to indulge. It’s not just about the sugar; it’s about the ceremony of the first bite.</p>
+                <ul class="exp-list">
+                    <li>
+                        <div class="exp-icon"><i data-lucide="sparkles"></i></div>
+                        <div>
+                            <h4 class="luxury-serif">Perfect for Celebrations</h4>
+                            <p>From intimate anniversaries to grand galas.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="exp-icon"><i data-lucide="gift"></i></div>
+                        <div>
+                            <h4 class="luxury-serif">Thoughtful Gifting</h4>
+                            <p>Signature velvet boxes that speak volumes.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="exp-icon"><i data-lucide="palette"></i></div>
+                        <div>
+                            <h4 class="luxury-serif">Custom Artistry</h4>
+                            <p>Bespoke designs tailored to your vision.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&q=80&w=800" alt="Experience" style="width: 100%; border-radius: 20px; box-shadow: 20px 20px 0 var(--highlight);">
+            </div>
+        </div>
+    </section>
 
-  <div class="menu">
-    <div class="item cake">Biscoff Cake - ₹1100</div>
-    <div class="item pastry">Chocolate Slice - ₹200</div>
-    <div class="item cake">Red Velvet - ₹900</div>
-    <div class="item pastry">Croissant - ₹150</div>
-  </div>
-</section>
+    <!-- Gallery Section -->
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="luxury-serif">The Gallery</h2>
+                <p>Visual poetry in every layer and every crust.</p>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800" alt="Bread"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=800" alt="Cake"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=800" alt="Dessert"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&q=80&w=800" alt="Pastry"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=800" alt="Cupcake"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800" alt="Donut"></div>
+            </div>
+        </div>
+    </section>
 
-<!-- GALLERY -->
-<section class="section reveal">
-  <h2>Gallery</h2>
-  <div class="gallery">
-    <img src="https://source.unsplash.com/300x300/?cake">
-    <img src="https://source.unsplash.com/300x300/?dessert">
-    <img src="https://source.unsplash.com/300x300/?bakery">
-  </div>
-</section>
+    <!-- Testimonials -->
+    <section class="section-padding testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="luxury-serif">Kind Words</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testi-card reveal">
+                    <i data-lucide="quote"></i>
+                    <p>"The Biscoff Caramel Cake is a masterclass in balance. Not too sweet, perfectly textured. The packaging felt like I was opening a piece of jewelry."</p>
+                    <div class="testi-user">
+                        <h5>Aria Chen</h5>
+                        <span>Food Critic</span>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <i data-lucide="quote"></i>
+                    <p>"Velour Crumbs handled our wedding cake with such grace. It wasn't just a dessert; it was the centerpiece of our evening."</p>
+                    <div class="testi-user">
+                        <h5>Marcus Thorne</h5>
+                        <span>Gifting Specialist</span>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <i data-lucide="quote"></i>
+                    <p>"Every time I order, the quality is consistent. The sourdough has that perfect crust that only true craft can produce."</p>
+                    <div class="testi-user">
+                        <h5>Elena Rodriguez</h5>
+                        <span>Pastry Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- TESTIMONIAL -->
-<section class="section reveal">
-  <h2>Testimonials</h2>
-  <p>"Best luxury bakery experience!"</p>
-</section>
+    <!-- How It Works -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="luxury-serif">Ordering Made Simple</h2>
+            </div>
+            <div class="how-grid reveal">
+                <div class="how-item">
+                    <i data-lucide="search" size="40"></i>
+                    <h4>Browse Menu</h4>
+                    <p>Explore our seasonal curations online.</p>
+                </div>
+                <div class="how-item">
+                    <i data-lucide="mouse-pointer-2" size="40"></i>
+                    <h4>Select Favorites</h4>
+                    <p>Choose your treats and custom options.</p>
+                </div>
+                <div class="how-item">
+                    <i data-lucide="credit-card" size="40"></i>
+                    <h4>Place Order</h4>
+                    <p>Secure checkout with real-time tracking.</p>
+                </div>
+                <div class="how-item">
+                    <i data-lucide="truck" size="40"></i>
+                    <h4>Enjoy Fresh</h4>
+                    <p>Hand-delivered to your doorstep in hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section reveal">
-  <h2>Contact</h2>
-  <form id="form">
-    <input placeholder="Name" required>
-    <input placeholder="Email" required>
-    <textarea placeholder="Message"></textarea>
-    <button>Send</button>
-  </form>
-</section>
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container contact-container">
+            <div class="contact-info reveal">
+                <h2 class="luxury-serif">Get in Touch</h2>
+                <p style="margin-bottom: 2rem;">Visit our boutique or reach out for custom orders and events.</p>
+                
+                <a href="#" class="info-link"><i data-lucide="map-pin"></i> 124 Pastry Lane, Velvet District</a>
+                <a href="tel:+1234567890" class="info-link"><i data-lucide="phone"></i> +1 (234) 567-890</a>
+                <a href="mailto:hello@velourcrumbs.com" class="info-link"><i data-lucide="mail"></i> hello@velourcrumbs.com</a>
+                
+                <div style="margin-top: 2rem;">
+                    <h4 class="luxury-serif">Hours</h4>
+                    <p>Mon - Sat: 08:00 AM - 08:00 PM</p>
+                    <p>Sunday: 09:00 AM - 04:00 PM</p>
+                </div>
+            </div>
+            
+            <form class="contact-form reveal">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message or Order Details" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
 
-<footer>
-  <p>© Velour Crumbs</p>
-</footer>
+    <!-- Instagram Strip -->
+    <div class="gallery-grid reveal" style="grid-template-rows: 200px; padding: 0;">
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=400"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=400"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&q=80&w=400"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=400"></div>
+    </div>
 
-<script src="script.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 class="luxury-serif" style="color: var(--white); margin-bottom: 1rem;">VELOUR CRUMBS</h3>
+                <p>Crafted indulgence, baked to perfection. We are the architects of flavor and the keepers of tradition.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#">Signature Breads</a></li>
+                    <li><a href="#">Luxury Cakes</a></li>
+                    <li><a href="#">Gifting Tins</a></li>
+                    <li><a href="#">Catering</a></li>
+                </ul>
+            </div>
+            <div class="footer-col newsletter">
+                <h4>Join the Circle</h4>
+                <p>Subscribe for seasonal releases and exclusive events.</p>
+                <form onsubmit="event.preventDefault(); alert('Welcome to the circle!');">
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2024 Velour Crumbs. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <div id="lightbox">
+        <img src="" alt="Preview">
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Menu Data
+        const menuData = [
+            { id: 1, name: "Biscoff Caramel Cake", category: "cakes", price: "₹1100", desc: "Smooth caramel layers infused with rich Biscoff, finished with crunch.", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400" },
+            { id: 2, name: "Artisanal Sourdough", category: "breads", price: "₹350", desc: "48-hour fermented loaf with a deep, complex flavor and airy crumb.", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400" },
+            { id: 3, name: "Belgian Chocolate Slice", category: "cakes", price: "₹200", desc: "Deep cocoa richness balanced with a silky ganache finish.", img: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=400" },
+            { id: 4, name: "Vanilla Bean Croissant", category: "pastries", price: "₹180", desc: "128 layers of buttery flake, filled with Madagascar vanilla bean.", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=400" },
+            { id: 5, name: "Lemon Meringue Tart", category: "pastries", price: "₹220", desc: "Zesty lemon curd topped with clouds of toasted meringue.", img: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&q=80&w=400" },
+            { id: 6, name: "Rosemary Focaccia", category: "breads", price: "₹280", desc: "Drenched in EVOO and topped with fresh garden rosemary.", img: "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?auto=format&fit=crop&q=80&w=400" },
+            { id: 7, name: "Red Velvet Opulence", category: "cakes", price: "₹950", desc: "Classic red velvet with a modern whipped cream cheese twist.", img: "https://images.unsplash.com/photo-1616031037011-087000171abe?auto=format&fit=crop&q=80&w=400" },
+            { id: 8, name: "Almond Praline Choux", category: "pastries", price: "₹210", desc: "Crispy choux shell filled with roasted almond praline cream.", img: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&q=80&w=400" }
+        ];
+
+        const menuGrid = document.getElementById('menu-items');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderMenu(filter = 'all') {
+            menuGrid.innerHTML = '';
+            const filtered = filter === 'all' ? menuData : menuData.filter(item => item.category === filter);
+            
+            filtered.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'menu-item reveal active';
+                el.innerHTML = `
+                    <div class="menu-img" style="background-image: url('${item.img}')"></div>
+                    <div class="menu-info">
+                        <h4>${item.name} <span class="price">${item.price}</span></h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+                menuGrid.appendChild(el);
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(btn.dataset.filter);
+            });
+        });
+
+        // Sticky Nav & Scroll Progress
+        const navbar = document.getElementById('navbar');
+        const scrollBar = document.getElementById('scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            // Navbar state
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Progress bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollBar.style.width = scrolled + "%";
+        });
+
+        // Intersection Observer for Reveal
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counters if this is the stats section
+                    if (entry.target.classList.contains('stats-banner')) {
+                        startCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .stats-banner').forEach(el => observer.observe(el));
+
+        // Animated Counters
+        let countersStarted = false;
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const speed = 200;
+                const updateCount = () => {
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    if (count < target) {
+                        counter.innerText = (count + inc).toFixed(target % 1 === 0 ? 0 : 1);
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.innerText = target + (target > 4 ? '+' : '★');
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Init Menu
+        renderMenu();
+
+    </script>
 </body>
 </html>
